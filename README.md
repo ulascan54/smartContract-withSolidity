@@ -77,6 +77,17 @@ What will we learn ?
 
 ## Types
 - Most common data types:
+  - bool: The possible values are constants true and false.
+
+  - Integers: Signed and unsigned integers of various sizes. Keywords uint8 to uint256 in steps of 8 (unsigned of 8 up to 256 bits) and int8 to int256. uint and int are aliases for uint256 and int256, respectively.
+
+  - int: It is the variable we use for numbers.
+
+  - uint: It is the variable we use for numbers.The difference from int is that negative numbers are not included.
+
+  - address: It is the variable where we keep the wallet addresses. Fixed size 20 bytes
+
+  - bytes32: It is a variable that holds string values as hexadecimal.
 
         // SPDX-License-Identifier: MIT
         pragma solidity ^0.8.7;
@@ -92,4 +103,52 @@ What will we learn ?
             int public maxInt = type(int).max;
             address public addr = 0x5B12321323123123123;
             bytes32 public b32 = 0x5B12321323123123123;
+        }
+### Useful docs:
+- https://docs.soliditylang.org/en/v0.8.15/types.html#value-types 
+- https://github.com/itublockchain/web3-bootcamp/blob/master/1x0_Variables/README.md
+
+## Variables
+There are 3 types of variables in Solidity:
+1. State Variables
+  - Declared outside the function.
+  - Stored on the blockchain.
+2. Local Variables:
+  - Not stored on the blockchain.
+  - Declared inside the function.
+3 .Global:
+  - Blockchain related variables.
+
+### State, Local and Global Variables
+
+        // SPDX-License-Identifier: MIT
+        pragma solidity ^0.8.13;
+
+        contract Variables {
+            // State variables are stored on the blockchain.
+            string public text = "Hello";
+            uint public num = 123;
+
+            function doSomething() public {
+                // Local variables are not saved to the blockchain.
+                uint i = 456;
+
+                // Here are some global variables
+                uint timestamp = block.timestamp; // Current block timestamp
+                address sender = msg.sender; // address of the caller
+            }
+        }
+### Default Variables
+- The concept of “undefined” or “null” values do not exist in Solidity. Default value assignment is made automatically for each defined value.
+
+        // SPDX-License-Identifier: MIT
+        pragma solidity ^0.8.7;
+
+        contract DefaultValues {
+            bool public b; // false
+            uint public u; // 0
+            int public i; // 0
+            address public a; // 0x00000000000000000
+            bytes32 public b32; // 0x00000000000000000
+            // mapping, structs, enums, fixed sized arrays
         }
