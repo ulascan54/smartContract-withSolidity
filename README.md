@@ -251,23 +251,24 @@ There are 3 types of variables in Solidity:
 
 - Pure function declares that no state variable will be changed or read.
 
-´´´
-// SPDX-License-Identifier: MIT
-pragma solidity ^0.8.17;
+        // SPDX-License-Identifier: MIT
+        pragma solidity ^0.8.17;
 
-contract ViewAndPure {
-uint public x = 1;
+        contract ViewAndPure {
+        uint public x = 1;
 
-    // Promise not to modify the state.
-    function addToX(uint y) public view returns (uint) {
-        return x + y;
-    }
+            // Promise not to modify the state.
+            function addToX(uint y) public view returns (uint) {
+                return x + y;
+            }
 
-    // Promise not to modify or read from the state.
-    function add(uint i, uint j) public pure returns (uint) {
-        return i + j;
-    }
+            // Promise not to modify or read from the state.
+            function add(uint i, uint j) public pure returns (uint) {
+                return i + j;
+            }
+        }
 
-}
+## Build and Deploy a Counter with Remix:
 
-´´´
+- [Code](homeworks/1hw-counterapp/counter.sol)
+- ![Quick Look](img/counter.png)
