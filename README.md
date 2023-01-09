@@ -1,18 +1,20 @@
 # Smart Contract With Solidity
 
-  -Paribu Hub / Akıllı Sözleşme &amp; Solidity Practicum-
+-Paribu Hub / Akıllı Sözleşme &amp; Solidity Practicum-
 
 ## My notes:
 
 ### What is Web3?
+
 - Access to blockchain-based networks via the Internet
 - Program access through a language for the use of these networks
 - Creating and managing applications (dApps) running on these networks
 - Web3 is used in many blockchain networks, such as Ethereum, and helps create and manage Ethereum-based applications (dApps). These networks often use blockchain technology to store and process data in a secure and immutable way.
 
->Web3 specifically enables the importance of storing and processing data in an immutable and secure way, and thus works effectively on dApps. This is especially important in today's widely used and fast
+> Web3 specifically enables the importance of storing and processing data in an immutable and secure way, and thus works effectively on dApps. This is especially important in today's widely used and fast
 
 ### What is Blockchain?
+
 - A blockchain is a data structure and a data management system in which data is linked together in a sequence to form a chain. This data is often referred to as transactions, and in a blockchain network, transactions are stored in interconnected blocks.
 
 - Since each block is designed to be linked to the previous block, the data in a blockchain network can be thought of as a chain. This structure is designed so that data cannot be altered or deleted, which is why it is considered a reliable data management system.
@@ -23,8 +25,8 @@
 
 Generally, there are two ways to develop smart contracts on blockchains: Using existing libraries and developing your own code from scratch:
 
-Using existing libraries
--------------------------
+## Using existing libraries
+
 Blockchains create their own libraries, so there is no need to write code from scratch for certain standard operations. With a few easy-to-prepare code pieces, we can quickly and easily create our own smart contracts by calling these libraries from GitHub.
 
 In Ethereum, these libraries are called ‘standards’. The Ethereum community has adopted many standards that help keep projects interoperable across implementations, and ensure smart contracts and dApps remain composable.
@@ -38,24 +40,25 @@ Tokens are one of the most fundamental contracts in blockchains and by understan
   - ERC-777: Allows people to build extra functionality on top of tokens such as a mixer contract for improved transaction privacy or an emergency recover function to bail you out if you lose your private keys.
   - ERC-1155: ERC-1155 allows for more efficient trades and bundling of transactions – thus saving costs. This token standard allows for creating both utility tokens (such as $BNB or $BAT) and Non-Fungible Tokens like CryptoPunks.
   - ERC-4626: A tokenized vault standard designed to optimize and unify the technical parameters of yield-bearing vaults.
-Developing your own code from scratch
+    Developing your own code from scratch
 
-Once we understand how the overall structure works using libraries in a blockchain, we can start developing our own contracts from scratch or we can make upgrades that may occur to add features, fix bugs, or improve performance. 
+Once we understand how the overall structure works using libraries in a blockchain, we can start developing our own contracts from scratch or we can make upgrades that may occur to add features, fix bugs, or improve performance.
 
+## What will we learn ?
 
-What will we learn ?
---------------------
 - Remix (a web3 Integrated Development Environment / IDE)
 - Solidity (a programming language for building smart contracts)
--Truffle and Hardhat (web3 frameworks for testing)
+  -Truffle and Hardhat (web3 frameworks for testing)
 
 ### Nice to Know
 
 #### We will also go through the following concepts in this course:
+
 - Web3.js and Ethers.js (JavaScript libraries that enable front-end apps to interact with the Ethereum blockchain)
 - A basic understanding of the Ethereum Virtual Machine (EVM)
 
 ## Beginner Tools for Development
+
 - Programming applications on Ethereum are similar to programming any other software project in terms of integrated development (IDE) selection. There are many options to choose from, you can pick the IDE or code editor that best suits your preferences. Most likely the best IDE choice for your Ethereum development is the IDE you already use for traditional software development.
 
 - Within the scope of this training, we will first learn how to develop a backend using a Remix IDE. Then we will test our codes using the Hardhat platform. We will make examples where we use a different testing platforms, Truffle, and the Ganache tool.
@@ -63,11 +66,12 @@ What will we learn ?
 - There are some common used tools (these will be explained later in this course):
 
   - Remix: https://remix.ethereum.org/
-  - Scaffold-ETH: https://github.com/scaffold-eth/scaffold-eth 
+  - Scaffold-ETH: https://github.com/scaffold-eth/scaffold-eth
   - eth.build: https://eth.build/
-  - One Click dApp: https://oneclickdapp.com/ 
-  
+  - One Click dApp: https://oneclickdapp.com/
+
 ## Deploy Your First Solidity Smart Contract with Remix IDE
+
         // SPDX-License-Identifier: MIT
         pragma solidity 0.8.7;
 
@@ -76,7 +80,9 @@ What will we learn ?
         }
 
 ## Types
+
 - Most common data types:
+
   - bool: The possible values are constants true and false.
 
   - Integers: Signed and unsigned integers of various sizes. Keywords uint8 to uint256 in steps of 8 (unsigned of 8 up to 256 bits) and int8 to int256. uint and int are aliases for uint256 and int256, respectively.
@@ -104,20 +110,27 @@ What will we learn ?
             address public addr = 0x5B12321323123123123;
             bytes32 public b32 = 0x5B12321323123123123;
         }
+
 ### Useful docs:
-- https://docs.soliditylang.org/en/v0.8.15/types.html#value-types 
+
+- https://docs.soliditylang.org/en/v0.8.15/types.html#value-types
 - https://github.com/itublockchain/web3-bootcamp/blob/master/1x0_Variables/README.md
 
 ## Variables
+
 There are 3 types of variables in Solidity:
+
 1. State Variables
-  - Declared outside the function.
-  - Stored on the blockchain.
+
+- Declared outside the function.
+- Stored on the blockchain.
+
 2. Local Variables:
-  - Not stored on the blockchain.
-  - Declared inside the function.
-3 .Global:
-  - Blockchain related variables.
+
+- Not stored on the blockchain.
+- Declared inside the function.
+  3 .Global:
+- Blockchain related variables.
 
 ### State, Local and Global Variables
 
@@ -138,7 +151,9 @@ There are 3 types of variables in Solidity:
                 address sender = msg.sender; // address of the caller
             }
         }
+
 ### Default Variables
+
 - The concept of “undefined” or “null” values do not exist in Solidity. Default value assignment is made automatically for each defined value.
 
         // SPDX-License-Identifier: MIT
@@ -201,8 +216,8 @@ There are 3 types of variables in Solidity:
             }
         }
 
-
 ### Declaring and importing Enum
+
 - File that the enum is declared in
 
         // SPDX-License-Identifier: MIT
@@ -216,6 +231,7 @@ There are 3 types of variables in Solidity:
             Rejected,
             Canceled
         }
+
 - File that imports the enum above
 
         // SPDX-License-Identifier: MIT
@@ -227,4 +243,31 @@ There are 3 types of variables in Solidity:
             Status public status;
         }
 
+## View and Pure Functions
 
+- Getter functions can be declared view or pure.
+
+- View function declares that no state will be changed.
+
+- Pure function declares that no state variable will be changed or read.
+
+´´´
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.17;
+
+contract ViewAndPure {
+uint public x = 1;
+
+    // Promise not to modify the state.
+    function addToX(uint y) public view returns (uint) {
+        return x + y;
+    }
+
+    // Promise not to modify or read from the state.
+    function add(uint i, uint j) public pure returns (uint) {
+        return i + j;
+    }
+
+}
+
+´´´
