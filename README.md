@@ -319,35 +319,32 @@ There are 3 types of variables in Solidity:
 ## For and While Loop
 
 - Solidity supports **for**, **while**, and **do** **while** loops.
-
 - Don't write loops that are unbounded as this can hit the gas limit, causing your transaction to fail.
-
 - For the reason above, **while** and **do while** loops are rarely used.
-
-        // SPDX-License-Identifier: MIT
+  <br>
+  `    // SPDX-License-Identifier: MIT
         pragma solidity ^0.8.17;
-
-        contract Loop {
-            function loop() public {
-                // for loop
-                for (uint i = 0; i < 10; i++) {
-                    if (i == 3) {
-                        // Skip to next iteration with continue
-                        continue;
+            contract Loop {
+                function loop() public {
+                    // for loop
+                    for (uint i = 0; i < 10; i++) {
+                        if (i == 3) {
+                            // Skip to next iteration with continue
+                            continue;
+                        }
+                        if (i == 5) {
+                            // Exit loop with break
+                            break;
+                        }
                     }
-                    if (i == 5) {
-                        // Exit loop with break
-                        break;
+                    // while loop
+                    uint j;
+                    while (j < 10) {
+                        j++;
                     }
-                }
-
-                // while loop
-                uint j;
-                while (j < 10) {
-                    j++;
                 }
             }
-        }
+   `
 
 ## Mapping
 
@@ -358,54 +355,54 @@ There are 3 types of variables in Solidity:
 - **valueType** can be any type including another mapping or an array.
 
 - Mappings are not iterable.
+  <br>
 
-                // SPDX-License-Identifier: MIT
-                pragma solidity ^0.8.17;
+                  // SPDX-License-Identifier: MIT
+                  pragma solidity ^0.8.17;
 
-                contract Mapping {
-                    // Mapping from address to uint
-                    mapping(address => uint) public myMap;
+                  contract Mapping {
+                      // Mapping from address to uint
+                      mapping(address => uint) public myMap;
 
-                    function get(address _addr) public view returns (uint) {
-                        // Mapping always returns a value.
-                        // If the value was never set, it will return the default value.
-                        return myMap[_addr];
-                    }
+                      function get(address _addr) public view returns (uint) {
+                          // Mapping always returns a value.
+                          // If the value was never set, it will return the default value.
+                          return myMap[_addr];
+                      }
 
-                    function set(address _addr, uint _i) public {
-                        // Update the value at this address
-                        myMap[_addr] = _i;
-                    }
+                      function set(address _addr, uint _i) public {
+                          // Update the value at this address
+                          myMap[_addr] = _i;
+                      }
 
-                    function remove(address _addr) public {
-                        // Reset the value to the default value.
-                        delete myMap[_addr];
-                    }
-                }
+                      function remove(address _addr) public {
+                          // Reset the value to the default value.
+                          delete myMap[_addr];
+                      }
+                  }
 
-                contract NestedMapping {
-                    // Nested mapping (mapping from address to another mapping)
-                    mapping(address => mapping(uint => bool)) public nested;
+                  contract NestedMapping {
+                      // Nested mapping (mapping from address to another mapping)
+                      mapping(address => mapping(uint => bool)) public nested;
 
-                    function get(address _addr1, uint _i) public view returns (bool) {
-                        // You can get values from a nested mapping
-                        // even when it is not initialized
-                        return nested[_addr1][_i];
-                    }
+                      function get(address _addr1, uint _i) public view returns (bool) {
+                          // You can get values from a nested mapping
+                          // even when it is not initialized
+                          return nested[_addr1][_i];
+                      }
 
-                    function set(address _addr1, uint _i, bool _boo) public {
-                        nested[_addr1][_i] = _boo;
-                    }
+                      function set(address _addr1, uint _i, bool _boo) public {
+                          nested[_addr1][_i] = _boo;
+                      }
 
-                    function remove(address _addr1, uint _i) public {
-                        delete nested[_addr1][_i];
-                    }
-                }
+                      function remove(address _addr1, uint _i) public {
+                          delete nested[_addr1][_i];
+                      }
+                  }
 
-        ## Iterable Mapping
+## Iterable Mapping
 
-        - You cannot iterate through a **mapping**. So here is an example of how to create an iterable **mapping**.
-
+- You cannot iterate through a **mapping**. So here is an example of how to create an iterable **mapping**.
 
         // SPDX-License-Identifier: MIT
         pragma solidity ^0.8.17;
@@ -487,5 +484,63 @@ There are 3 types of variables in Solidity:
                 assert(map.getKeyAtIndex(0) == address(0));
                 assert(map.getKeyAtIndex(1) == address(3));
                 assert(map.getKeyAtIndex(2) == address(2));
+            }
+        }
+
+## Structs
+
+- You can define your own type by creating a **struct**.
+
+- They are useful for grouping together related data.
+
+- Structs can be declared outside of a contract and imported in another contract.
+
+<br>
+
+        // SPDX-License-Identifier: MIT
+        pragma solidity ^0.8.17;
+
+        contract Todos {
+            struct Todo {
+                string text;
+                bool completed;
+            }
+
+            // An array of 'Todo' structs
+            Todo[] public todos;
+
+            function create(string calldata _text) public {
+                // 3 ways to initialize a struct
+                // - calling it like a function
+                todos.push(Todo(_text, false));
+
+                // key value mapping
+                todos.push(Todo({text: _text, completed: false}));
+
+                // initialize an empty struct and then update it
+                Todo memory todo;
+                todo.text = _text;
+                // todo.completed initialized to false
+
+                todos.push(todo);
+            }
+
+            // Solidity automatically created a getter for 'todos' so
+            // you don't actually need this function.
+            function get(uint _index) public view returns (string memory text, bool completed) {
+                Todo storage todo = todos[_index];
+                return (todo.text, todo.completed);
+            }
+
+            // update text
+            function updateText(uint _index, string calldata _text) public {
+                Todo storage todo = todos[_index];
+                todo.text = _text;
+            }
+
+            // update completed
+            function toggleCompleted(uint _index) public {
+                Todo storage todo = todos[_index];
+                todo.completed = !todo.completed;
             }
         }
