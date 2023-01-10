@@ -8,9 +8,9 @@
 
 - [Code](homeworks/1hw-counterapp/counter.sol)
 
-2. [ ] **Hands on Task (Beginner Level): Build and Deploy an Ether-Store Smart Contract with Remix IDE:**
+2. [x] **Hands on Task (Beginner Level): Build and Deploy an Ether-Store Smart Contract with Remix IDE:**
 
-- [Code]()
+- [Code](homeworks/2hw-etherStore/etherStore.sol)
 
 3. [ ] **Hands on Task (Intermediate Level): Build and Deploy a To-Do List:**
 
