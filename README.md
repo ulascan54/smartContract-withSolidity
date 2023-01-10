@@ -375,6 +375,7 @@ pragma solidity ^0.8.17;
 - Mappings are not iterable.
   <br>
 
+```js
                   // SPDX-License-Identifier: MIT
                   pragma solidity ^0.8.17;
 
@@ -417,11 +418,13 @@ pragma solidity ^0.8.17;
                           delete nested[_addr1][_i];
                       }
                   }
+```
 
 ## Iterable Mapping
 
 - You cannot iterate through a **mapping**. So here is an example of how to create an iterable **mapping**.
 
+```js
         // SPDX-License-Identifier: MIT
         pragma solidity ^0.8.17;
 
@@ -504,6 +507,7 @@ pragma solidity ^0.8.17;
                 assert(map.getKeyAtIndex(2) == address(2));
             }
         }
+```
 
 ## Structs
 
@@ -514,6 +518,7 @@ pragma solidity ^0.8.17;
 - Structs can be declared outside of a contract and imported in another contract.
 
 <br>
+
 ```js
         // SPDX-License-Identifier: MIT
         pragma solidity ^0.8.17;
@@ -562,8 +567,8 @@ pragma solidity ^0.8.17;
                 todo.completed = !todo.completed;
             }
         }
+```
 
-````
 ## Function Modifier
 
 - Modifiers are code that can be run before and / or after a function call.
@@ -630,7 +635,7 @@ contract FunctionModifier {
     }
 }
 
-````
+```
 
 ## Events
 
