@@ -359,45 +359,133 @@ There are 3 types of variables in Solidity:
 
 - Mappings are not iterable.
 
+                // SPDX-License-Identifier: MIT
+                pragma solidity ^0.8.17;
+
+                contract Mapping {
+                    // Mapping from address to uint
+                    mapping(address => uint) public myMap;
+
+                    function get(address _addr) public view returns (uint) {
+                        // Mapping always returns a value.
+                        // If the value was never set, it will return the default value.
+                        return myMap[_addr];
+                    }
+
+                    function set(address _addr, uint _i) public {
+                        // Update the value at this address
+                        myMap[_addr] = _i;
+                    }
+
+                    function remove(address _addr) public {
+                        // Reset the value to the default value.
+                        delete myMap[_addr];
+                    }
+                }
+
+                contract NestedMapping {
+                    // Nested mapping (mapping from address to another mapping)
+                    mapping(address => mapping(uint => bool)) public nested;
+
+                    function get(address _addr1, uint _i) public view returns (bool) {
+                        // You can get values from a nested mapping
+                        // even when it is not initialized
+                        return nested[_addr1][_i];
+                    }
+
+                    function set(address _addr1, uint _i, bool _boo) public {
+                        nested[_addr1][_i] = _boo;
+                    }
+
+                    function remove(address _addr1, uint _i) public {
+                        delete nested[_addr1][_i];
+                    }
+                }
+
+        ## Iterable Mapping
+
+        - You cannot iterate through a **mapping**. So here is an example of how to create an iterable **mapping**.
+
+
         // SPDX-License-Identifier: MIT
         pragma solidity ^0.8.17;
 
-        contract Mapping {
-            // Mapping from address to uint
-            mapping(address => uint) public myMap;
-
-            function get(address _addr) public view returns (uint) {
-                // Mapping always returns a value.
-                // If the value was never set, it will return the default value.
-                return myMap[_addr];
+        library IterableMapping {
+            // Iterable mapping from address to uint;
+            struct Map {
+                address[] keys;
+                mapping(address => uint) values;
+                mapping(address => uint) indexOf;
+                mapping(address => bool) inserted;
             }
 
-            function set(address _addr, uint _i) public {
-                // Update the value at this address
-                myMap[_addr] = _i;
+            function get(Map storage map, address key) public view returns (uint) {
+                return map.values[key];
             }
 
-            function remove(address _addr) public {
-                // Reset the value to the default value.
-                delete myMap[_addr];
+            function getKeyAtIndex(Map storage map, uint index) public view returns (address) {
+                return map.keys[index];
+            }
+
+            function size(Map storage map) public view returns (uint) {
+                return map.keys.length;
+            }
+
+            function set(Map storage map, address key, uint val) public {
+                if (map.inserted[key]) {
+                    map.values[key] = val;
+                } else {
+                    map.inserted[key] = true;
+                    map.values[key] = val;
+                    map.indexOf[key] = map.keys.length;
+                    map.keys.push(key);
+                }
+            }
+
+            function remove(Map storage map, address key) public {
+                if (!map.inserted[key]) {
+                    return;
+                }
+
+                delete map.inserted[key];
+                delete map.values[key];
+
+                uint index = map.indexOf[key];
+                uint lastIndex = map.keys.length - 1;
+                address lastKey = map.keys[lastIndex];
+
+                map.indexOf[lastKey] = index;
+                delete map.indexOf[key];
+
+                map.keys[index] = lastKey;
+                map.keys.pop();
             }
         }
 
-        contract NestedMapping {
-            // Nested mapping (mapping from address to another mapping)
-            mapping(address => mapping(uint => bool)) public nested;
+        contract TestIterableMap {
+            using IterableMapping for IterableMapping.Map;
 
-            function get(address _addr1, uint _i) public view returns (bool) {
-                // You can get values from a nested mapping
-                // even when it is not initialized
-                return nested[_addr1][_i];
-            }
+            IterableMapping.Map private map;
 
-            function set(address _addr1, uint _i, bool _boo) public {
-                nested[_addr1][_i] = _boo;
-            }
+            function testIterableMap() public {
+                map.set(address(0), 0);
+                map.set(address(1), 100);
+                map.set(address(2), 200); // insert
+                map.set(address(2), 200); // update
+                map.set(address(3), 300);
 
-            function remove(address _addr1, uint _i) public {
-                delete nested[_addr1][_i];
+                for (uint i = 0; i < map.size(); i++) {
+                    address key = map.getKeyAtIndex(i);
+
+                    assert(map.get(key) == i * 100);
+                }
+
+                map.remove(address(1));
+
+                // keys = [address(0), address(3), address(2)]
+                assert(map.size() == 3);
+                assert(map.getKeyAtIndex(0) == address(0));
+                assert(map.getKeyAtIndex(1) == address(3));
+                assert(map.getKeyAtIndex(2) == address(2));
             }
         }
