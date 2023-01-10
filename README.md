@@ -1,8 +1,26 @@
 # Smart Contract With Solidity
 
--Paribu Hub / Akıllı Sözleşme &amp; Solidity Practicum-
+==**-Paribu Hub / Akıllı Sözleşme &amp; Solidity Practicum-**==
 
-## My notes:
+# Homework:
+
+1. [x] **Deploy Your First Solidity Smart Contract with Remix IDE:**
+
+- [Code](homeworks/1hw-counterapp/counter.sol)
+
+2. [ ] **Hands on Task (Beginner Level): Build and Deploy an Ether-Store Smart Contract with Remix IDE:**
+
+- [Code]()
+
+3. [ ] **Hands on Task (Intermediate Level): Build and Deploy a To-Do List:**
+
+- [Code]()
+
+4. [ ] **Hands on Task (Intermediate Level): Build and Deploy a Crowdfund Application:**
+
+- [Code]()
+
+# My notes:
 
 ### What is Web3?
 
@@ -268,7 +286,17 @@ There are 3 types of variables in Solidity:
             }
         }
 
-## Build and Deploy a Counter with Remix:
+## Constants
 
-- [Code](homeworks/1hw-counterapp/counter.sol)
-- ![Quick Look](img/counter.png)
+- Constants are variables that cannot be modified.
+- Their value is hard coded and using constants can save gas cost.
+  // SPDX-License-Identifier: MIT
+  pragma solidity ^0.8.17;
+
+        contract Constants {
+            // coding convention to uppercase constant variables
+            address public constant MY_ADDRESS = 0x777788889999AaAAbBbbCcccddDdeeeEfFFfCcCc;
+            uint public constant MY_UINT = 123;
+        }
+
+##
