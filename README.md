@@ -323,27 +323,27 @@ There are 3 types of variables in Solidity:
 - For the reason above, **while** and **do while** loops are rarely used.
   <br>
   `  // SPDX-License-Identifier: MIT
-  pragma solidity ^0.8.17;
-      contract Loop {
-          function loop() public {
-              // for loop
-              for (uint i = 0; i < 10; i++) {
-                  if (i == 3) {
-                      // Skip to next iteration with continue
-                      continue;
-                  }
-                  if (i == 5) {
-                      // Exit loop with break
-                      break;
-                  }
-              }
-              // while loop
-              uint j;
-              while (j < 10) {
-                  j++;
-              }
-          }
-      }`
+pragma solidity ^0.8.17;
+    contract Loop {
+        function loop() public {
+            // for loop
+            for (uint i = 0; i < 10; i++) {
+                if (i == 3) {
+                    // Skip to next iteration with continue
+                    continue;
+                }
+                if (i == 5) {
+                    // Exit loop with break
+                    break;
+                }
+            }
+            // while loop
+            uint j;
+            while (j < 10) {
+                j++;
+            }
+        }
+    }`
 
 ## Mapping
 
@@ -610,4 +610,29 @@ contract FunctionModifier {
     }
 }
 
+```
+
+## Events
+
+- **Events** allow logging to the Ethereum blockchain. Some use cases for events are:
+  - Listening for events and updating user interface
+  - A cheap form of storage
+
+```sol
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.17;
+
+contract Event {
+    // Event declaration
+    // Up to 3 parameters can be indexed.
+    // Indexed parameters helps you filter the logs by the indexed parameter
+    event Log(address indexed sender, string message);
+    event AnotherLog();
+
+    function test() public {
+        emit Log(msg.sender, "Hello World!");
+        emit Log(msg.sender, "Hello EVM!");
+        emit AnotherLog();
+    }
+}
 ```
