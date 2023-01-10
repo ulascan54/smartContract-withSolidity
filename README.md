@@ -90,12 +90,14 @@ Once we understand how the overall structure works using libraries in a blockcha
 
 ## Deploy Your First Solidity Smart Contract with Remix IDE
 
+```js
         // SPDX-License-Identifier: MIT
         pragma solidity 0.8.7;
 
         contract HelloWorld {
             string public myString = "hello world";
         }
+```
 
 ## Types
 
@@ -113,6 +115,7 @@ Once we understand how the overall structure works using libraries in a blockcha
 
   - bytes32: It is a variable that holds string values as hexadecimal.
 
+```js
         // SPDX-License-Identifier: MIT
         pragma solidity ^0.8.7;
 
@@ -128,6 +131,7 @@ Once we understand how the overall structure works using libraries in a blockcha
             address public addr = 0x5B12321323123123123;
             bytes32 public b32 = 0x5B12321323123123123;
         }
+```
 
 ### Useful docs:
 
@@ -152,6 +156,7 @@ There are 3 types of variables in Solidity:
 
 ### State, Local and Global Variables
 
+```js
         // SPDX-License-Identifier: MIT
         pragma solidity ^0.8.13;
 
@@ -169,11 +174,13 @@ There are 3 types of variables in Solidity:
                 address sender = msg.sender; // address of the caller
             }
         }
+```
 
 ### Default Variables
 
 - The concept of “undefined” or “null” values do not exist in Solidity. Default value assignment is made automatically for each defined value.
 
+```js
         // SPDX-License-Identifier: MIT
         pragma solidity ^0.8.7;
 
@@ -185,12 +192,14 @@ There are 3 types of variables in Solidity:
             bytes32 public b32; // 0x00000000000000000
             // mapping, structs, enums, fixed sized arrays
         }
+```
 
 ## Enum
 
 - Solidity supports enumerables and they are useful to model choice and keep track of state.
 - Enums can be declared outside of a contract.
 
+```js
         // SPDX-License-Identifier: MIT
         pragma solidity ^0.8.13;
 
@@ -260,6 +269,7 @@ There are 3 types of variables in Solidity:
         contract Enum {
             Status public status;
         }
+```
 
 ## View and Pure Functions
 
@@ -269,6 +279,7 @@ There are 3 types of variables in Solidity:
 
 - Pure function declares that no state variable will be changed or read.
 
+```js
         // SPDX-License-Identifier: MIT
         pragma solidity ^0.8.17;
 
@@ -285,12 +296,14 @@ There are 3 types of variables in Solidity:
                 return i + j;
             }
         }
+```
 
 ## Constants
 
 - Constants are variables that cannot be modified.
 - Their value is hard coded and using constants can save gas cost.
 
+```js
             // SPDX-License-Identifier: MIT
             pragma solidity ^0.8.17;
                 contract Constants {
@@ -298,11 +311,13 @@ There are 3 types of variables in Solidity:
                     address public constant MY_ADDRESS = 0x777788889999AaAAbBbbCcccddDdeeeEfFFfCcCc;
                     uint public constant MY_UINT = 123;
                 }
+```
 
 ## Immutable
 
 - Immutable variables are like constants. Values of immutable variables can be set inside the constructor but cannot be modified afterwards.
 
+```js
                 // SPDX-License-Identifier: MIT
                 pragma solidity ^0.8.17;
                 contract Immutable {
@@ -315,6 +330,7 @@ There are 3 types of variables in Solidity:
                         MY_UINT = _myUint;
                     }
                 }
+```
 
 ## For and While Loop
 
@@ -322,7 +338,9 @@ There are 3 types of variables in Solidity:
 - Don't write loops that are unbounded as this can hit the gas limit, causing your transaction to fail.
 - For the reason above, **while** and **do while** loops are rarely used.
   <br>
-  `  // SPDX-License-Identifier: MIT
+
+```js
+ // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.17;
     contract Loop {
         function loop() public {
@@ -343,7 +361,8 @@ pragma solidity ^0.8.17;
                 j++;
             }
         }
-    }`
+    }
+```
 
 ## Mapping
 
@@ -495,7 +514,7 @@ pragma solidity ^0.8.17;
 - Structs can be declared outside of a contract and imported in another contract.
 
 <br>
-
+```js
         // SPDX-License-Identifier: MIT
         pragma solidity ^0.8.17;
 
@@ -544,6 +563,7 @@ pragma solidity ^0.8.17;
             }
         }
 
+````
 ## Function Modifier
 
 - Modifiers are code that can be run before and / or after a function call.
@@ -610,7 +630,7 @@ contract FunctionModifier {
     }
 }
 
-```
+````
 
 ## Events
 
@@ -618,7 +638,7 @@ contract FunctionModifier {
   - Listening for events and updating user interface
   - A cheap form of storage
 
-```sol
+```js
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.17;
 
@@ -646,7 +666,7 @@ contract Event {
   - **assert** is used to check for code that should never be false. Failing assertion probably means that there is a bug.
 - Use custom error to save gas.
 
-```sol
+```js
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.17;
 
@@ -693,7 +713,7 @@ contract Error {
 
 - Another example:
 
-```sol
+```js
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.17;
 
