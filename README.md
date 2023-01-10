@@ -16,9 +16,9 @@
 
 - [Code](homeworks/3hw-todolistapp/todoList.sol)
 
-4. [ ] **Hands on Task (Intermediate Level): Build and Deploy a Crowdfund Application:**
+4. [x] **Hands on Task (Intermediate Level): Build and Deploy a Crowdfund Application:**
 
-- [Code]()
+- [Code](homeworks/4hw-crowdfundApp/crowdFund.sol)
 
 # My notes:
 
