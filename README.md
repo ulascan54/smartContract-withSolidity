@@ -12,9 +12,9 @@
 
 - [Code](homeworks/2hw-etherStore/etherStore.sol)
 
-3. [ ] **Hands on Task (Intermediate Level): Build and Deploy a To-Do List:**
+3. [x] **Hands on Task (Intermediate Level): Build and Deploy a To-Do List:**
 
-- [Code]()
+- [Code](homeworks/3hw-todolistapp/todoList.sol)
 
 4. [ ] **Hands on Task (Intermediate Level): Build and Deploy a Crowdfund Application:**
 
